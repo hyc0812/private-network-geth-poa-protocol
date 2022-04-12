@@ -145,16 +145,16 @@ Show peer numbers:
 ### Mining Ethereum blocks
 To begin mining our blockchain, we can run:
 ```javascript
-miner.start()
+> miner.start()
 ```
 Let's allow it to run for a while, and then stop the mining by typing:
 ```javascript
-miner.stop()
+> miner.stop()
 ```
 
 Now We have rewarded some tokens for mining new blocks. We can verify this by running the following command:
 ```javascript
-eth.getBalance(eth.accounts[0])
+> eth.getBalance(eth.accounts[0])
 ```
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2rhyc3680lxi1nxa0jqo.png)
@@ -162,7 +162,7 @@ eth.getBalance(eth.accounts[0])
 ### Sending Tokens
 **Option 1:**
 ```javascript
-eth.sendTransaction({from: ACCOUNT_pc1_STRING, to: ACCOUNT_pc2_STRING, value: 5000})
+> eth.sendTransaction({from: ACCOUNT_pc1_STRING, to: ACCOUNT_pc2_STRING, value: 5000})
 ```
 > **Value** here is in Wei (Where 1 ETH equals 1 x 10 ^ 18 Wei)
 
