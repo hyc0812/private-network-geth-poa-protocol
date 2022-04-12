@@ -1,6 +1,6 @@
 ## Setting up a private network with multiple PCs using Go Ethereum (Geth)
 
-> ### This blog explains how to set up a multiple nodes private blockchain network running on different computers.
+> ### This blog explains how to set up a multiple nodes private blockchain network.
 > _This tutorial is meant for those with some knowledge of Ethereum and smart contracts, who have some knowledge of nodes, geth and POA, etc._
 > The purpose of building this blog is to write down the detailed operation history and my memo for learning the dApps.
 > If you are also interested and want to get hands dirty, just follow these steps below and have fun!~
