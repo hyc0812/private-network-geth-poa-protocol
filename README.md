@@ -62,6 +62,29 @@ Copy the following code and name it as **genesis.json**.
   }
 ```
 This is the code for creating genesis block.
+
+In the same directory we add file **mineWhenNeeded.js** and paste the following code:
+```js
+var mining_threads = 1
+
+function checkWork() {
+    if (eth.getBlock("pending").transactions.length > 0) {
+        if (eth.mining) return;
+        console.log("== Pending transactions! Mining...");
+        miner.start(mining_threads);
+    } else {
+        miner.stop();
+        console.log("== No transactions! Mining stopped.");
+    }
+}
+
+eth.filter("latest", function(err, block) { checkWork(); });
+eth.filter("pending", function(err, block) { checkWork(); });
+
+checkWork();
+```
+> For mining automatically when necessary. 
+
 To create a blockchain node using this, we navigate to the directory that created this file, and run the following command: 
 
 > This imports and sets the canonical genesis block for your chain.
@@ -77,7 +100,7 @@ Once node is initialized to the desired genesis state, it is time to set up the 
 > Any node can be used as an entry point. I recommend dedicating a single node as the rendezvous point which all other nodes use to join. This node is called the ‘bootstrap node’. 
 
 ```linux
-pc1$ geth --datadir . --keystore ~/Library/ethereum/keystore --allow-insecure-unlock --http --http.api 'personal,eth,net,web3,txpool,miner' --http.corsdomain "*" --networkid 15 --nat extip:IP_ADDRESS --mine --miner.etherbase="GETH_ACCOUNT_ADDRESS" 
+pc1$ geth --datadir . --keystore ~/Library/ethereum/keystore --unlock 0 --http --http.api 'personal,eth,net,web3,txpool,miner' --http.corsdomain "*" --networkid 15 --preload "mineWhenNeeded.js" --nat extip:IP_ADDRESS --mine --miner.etherbase="GETH_ACCOUNT_ADDRESS" 
 ```
 
 > Replace the **keystore** route, **GETH_ACCOUNT_ADDRESS** and the **IP_ADDRESS** with yours.
