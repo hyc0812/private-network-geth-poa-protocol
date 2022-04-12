@@ -172,7 +172,7 @@ We should get a green transaction hash if the transaction has been done correctl
 **Option 2:**
 We can use MetaMask to transfer ETH from account_pc1 to account_pc2 and vice versa. Should be faster and simpler.
 
-ENJOY!
+### ENJOY!
 
 
 ## References
