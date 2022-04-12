@@ -151,7 +151,7 @@ pc2$ geth --datadir . --keystore /home/yongchang/.ethereum/keystore --allow-inse
 
 Open a new CLI and input the following:
 ```linux
-pc2$ geth attach geth.ipc
+pc2$ geth --preload "mineWhenNeeded.js" --preload "checkAllBalances.js" attach geth.ipc
 ```
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/19y759q7qi3luld44pnm.png)
