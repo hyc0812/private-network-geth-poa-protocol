@@ -142,7 +142,7 @@ pc2$ geth --datadir . --networkid 15 --port 30304 --bootnodes "enr:-YOUR_ENR_STR
 **Alternatively** use this one to connect the second node to the bootstrap node:
 ```linux
 pc2$ geth account new
-pc2$ geth --datadir . --keystore /home/yongchang/.ethereum/keystore --allow-insecure-unlock --nodiscover --http --http.api 'personal,eth,net,web3,txpool,miner' --http.corsdomain "*" --networkid 15 --port 30304 --mine --miner.etherbase="YOUR_ACCOUNT_ADDRESS" --bootnodes "BOOTNODE ENR"
+pc2$ geth --datadir . --keystore /home/yongchang/.ethereum/keystore --allow-insecure-unlock --http --http.api 'personal,eth,net,web3,txpool,miner' --http.corsdomain "*" --networkid 15 --port 30304 --mine --miner.etherbase="YOUR_ACCOUNT_ADDRESS" --bootnodes "BOOTNODE ENR"
 ```
 > Node 2 will be a miner using this command
 > Use your own keystore route, account address and enr string.
