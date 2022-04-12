@@ -28,7 +28,7 @@ pc1$ ifconfig|grep netmask|awk '{print $2}'
 Output:
 `127.0.0.1
 1X.1XX.2XX.35`
-> Use the second one not 127.0.0.1.
+> Use the second one.
 
 ### Generate a new geth account
 ```linux
@@ -100,7 +100,7 @@ Once node is initialized to the desired genesis state, it is time to set up the 
 > Any node can be used as an entry point. I recommend dedicating a single node as the rendezvous point which all other nodes use to join. This node is called the ‘bootstrap node’. 
 
 ```linux
-pc1$ geth --datadir . --keystore ~/Library/ethereum/keystore --unlock 0 --http --http.api 'personal,eth,net,web3,txpool,miner' --http.corsdomain "*" --networkid 15 --preload "mineWhenNeeded.js" --nat extip:IP_ADDRESS --mine --miner.etherbase="GETH_ACCOUNT_ADDRESS" 
+pc1$ geth --datadir . --keystore ~/Library/ethereum/keystore --nodiscover --allow-insecure-unlock --http --http.api 'personal,eth,net,web3,txpool,miner' --http.corsdomain "*" --networkid 15 --preload "mineWhenNeeded.js" --nat extip:IP_ADDRESS --mine --miner.etherbase="GETH_ACCOUNT_ADDRESS" 
 ```
 
 > Replace the **keystore** route, **GETH_ACCOUNT_ADDRESS** and the **IP_ADDRESS** with yours.
