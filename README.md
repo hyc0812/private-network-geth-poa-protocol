@@ -1,16 +1,22 @@
 ## Setting up a private network with multiple PCs using Go Ethereum (Geth)
 
-> ### This blog explains how to set up a multiple nodes private blockchain network.
+
+
+
+> This blog explains how to set up a private blockchain network with multiple nodes running on different computers.
+
 > _This tutorial is meant for those with some knowledge of Ethereum and smart contracts, who have some knowledge of nodes, geth and POA, etc._
 > The purpose of building this blog is to write down the detailed operation history and my memo for learning the dApps.
 > If you are also interested and want to get hands dirty, just follow these steps below and have fun!~
 
 ### Prerequisites
-- Two PCs (MacOS and LinuxOS are recommended)
+- Two PCs (I used MacOS and LinuxOS)
 - [Geth](https://geth.ethereum.org/docs/install-and-build/installing-geth) and [Node.js](https://nodejs.org/en/) installed
+- MetaMask (optional)
 
 
-> In Command Line Interface (CLI) We mark the two computers as `pc1` and `pc2`. 
+> **NOTE:** In the following **Command Line Interface** (CLI) We mark the two CLIs running on different computers as `pc1$` and `pc2$`. 
+> **Do not** copy the prefix `pc1$` and `pc2$`. 
 
 ## Getting started
 
@@ -22,12 +28,13 @@ pc1$ ifconfig|grep netmask|awk '{print $2}'
 Output:
 `127.0.0.1
 1X.1XX.2XX.35`
+> Use the second one not 127.0.0.1.
 
 ### Generate a new geth account
 ```linux
 geth account new
 ```
-output:
+Output:
 E.g. :
 `Your new key was generated`
 `Public address of the key:`   `0xXa79b38262Xf270d5A3141X4F326X76A9F37e9E4`
@@ -70,10 +77,10 @@ Once node is initialized to the desired genesis state, it is time to set up the 
 > Any node can be used as an entry point. I recommend dedicating a single node as the rendezvous point which all other nodes use to join. This node is called the ‘bootstrap node’. 
 
 ```linux
-pc1$ geth --datadir . --keystore ~/Library/ethereum/keystore --allow-insecure-unlock --http --http.api 'personal,eth,net,web3,txpool,miner' --http.corsdomain "*" --networkid 15 --nat extip:YOUR_IP_ADDRESS --mine --miner.etherbase="YOUR_ACCOUNT_ADDRESS" 
+pc1$ geth --datadir . --keystore ~/Library/ethereum/keystore --allow-insecure-unlock --http --http.api 'personal,eth,net,web3,txpool,miner' --http.corsdomain "*" --networkid 15 --nat extip:IP_ADDRESS --mine --miner.etherbase="GETH_ACCOUNT_ADDRESS" 
 ```
 
-> Replace the Geth account address and the IP address with yours.
+> Replace the **keystore** route, **GETH_ACCOUNT_ADDRESS** and the **IP_ADDRESS** with yours.
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xthgu9fi7sjyuvcqal9a.png)
 
@@ -89,26 +96,39 @@ pc1$ geth attach geth.ipc --exec admin.nodeInfo.enr
 Before running a member node on **LinuxOS Ubuntu**, we have to first initialize it with the same genesis file as used for the bootstrap node.
 > Navigate to the directory **/genesis.json** first.
 ```linux
-pc2$ geth init --datadir pc2 genesis.json
+pc2$ geth init --datadir . genesis.json
 ```
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xc3zr8mv5dcz67dqkb8j.png)
 
 Then we connect the second node to the bootstrap node:
+**Option 1**:
 ```linux
-pc2$ geth --datadir pc2 --networkid 15 --port 30304 --bootnodes "enr:-KO4QPSFgMKtubyZlc5yyvfmAZvb7uAuevXAiggzQ1ert0w2GQI6h6v15cnRdn2LJqyEC8RFoVNo5VyfWUltwDqF1YGGAYAZwr5Qg2V0aMfGhMGBRa2AgmlkgnY0gmlwhAqI5COJc2VjcDI1NmsxoQI30yNxr1nIqyU0YYAQaNFBztGq1gVfvYMsYUd4hd9zBoRzbmFwwIN0Y3CCdl-DdWRwgnZf"
+pc2$ geth --datadir . --networkid 15 --port 30304 --bootnodes "enr:-YOUR_ENR_STRING"
 ```
-> Use your own enr instead. 
-Now on pc2, check the connection status.
+> In this option:
+> Node 2 will not be a miner.
+> Use your own enr string.
 
-first open a new CLI and input the following:
+**Option 2**:
+**Alternatively** use this one to connect the second node to the bootstrap node:
 ```linux
-pc2$ geth attach pc2/geth.ipc
+pc2$ geth account new
+pc2$ geth --datadir . --keystore /home/yongchang/.ethereum/keystore --allow-insecure-unlock --http --http.api 'personal,eth,net,web3,txpool,miner' --http.corsdomain "*" --networkid 15 --port 30304 --mine --miner.etherbase="YOUR_ACCOUNT_ADDRESS" --bootnodes "BOOTNODE ENR"
+```
+> Node 2 will be a miner using this command
+> Use your own keystore route, account address and enr string.
+
+### Check the connection status.
+
+Open a new CLI and input the following:
+```linux
+pc2$ geth attach geth.ipc
 ```
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/19y759q7qi3luld44pnm.png)
 
-Then find peers:
+Find peers:
 ```linux
 > admin.peers
 ```
@@ -140,41 +160,23 @@ eth.getBalance(eth.accounts[0])
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2rhyc3680lxi1nxa0jqo.png)
 
 ### Sending Tokens
-
-Run the following command to finish the authentication process of **account 0** before sending tokens:
+**Option 1:**
 ```javascript
-personal.unlockAccount(eth.accounts[0])
+eth.sendTransaction({from: ACCOUNT_pc1_STRING, to: ACCOUNT_pc2_STRING, value: 5000})
 ```
-Input the password we have set to unlock **account 0**:
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/doymc04mjfh2r8mwbeym.png)
-
-Now let's transfer tokens from **account 0** to **account 1** by running this command:
-```javascript
-eth.sendTransaction({from: eth.accounts[0], to: eth.accounts[1], value: 500000})
-```
-
 > **Value** here is in Wei (Where 1 ETH equals 1 x 10 ^ 18 Wei)
 
-We should get a green transaction hash if the transaction has been done correctly.
+We should get a green transaction hash if the transaction has been done correctly (should mining for a while).
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/pi83kyutpekqyengbdr2.png)
 
-Since we had stopped the mining process before we were creating the transaction, this transaction is added to the memory pool rather than being added to the blockchain. At this point, account 1 cannot receive the transferred token if we run:
+**Option 2:**
+We can use MetaMask to transfer ETH from account_pc1 to account_pc2 and vice versa. Should be faster and simpler.
 
-```javascript
-eth.getBalance(eth.accounts[1])
-```
+ENJOY!
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xywjc6cntze2wta4o84l.png)
 
-Let's start the mining process again for a while:
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hvdjno1ndn2kp7m5jphs.png)
+## References
 
-And run the following again:
-```javascript
-eth.getBalance(eth.accounts[1])
-```
-Finally transferred tokens have been received by **account 1**:
+https://geth.ethereum.org/
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qdsuoo985zcvl33htr99.png)
 
-Pretty COOL!
