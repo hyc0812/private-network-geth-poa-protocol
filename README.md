@@ -111,11 +111,10 @@ Now use another CLI to extract the ‘node record’ of the bootnode using the J
 ```linux
 pc1$ geth attach geth.ipc --exec admin.nodeInfo.enr
 ```
-Or:
+Or use this one to prompt a new Geth CLI and get the ‘node record’:
 ```linux
-pc1$ geth --preload "mineWhenNeeded.js", "checkAllBalances.js" attach geth.ipc
-   
-   > admin.nodeInfo.enr
+pc1$ geth --preload "mineWhenNeeded.js" --preload "checkAllBalances.js" attach geth.ipc
+pc1> admin.nodeInfo.enr
 ```
 
 > This command should print a base64 string such as the following example. Other nodes will use the information contained in the bootstrap node record to connect to your peer-to-peer network.
