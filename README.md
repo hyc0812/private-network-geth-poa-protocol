@@ -1,6 +1,6 @@
 ## Setting up a private network with multiple PCs using Go Ethereum (Geth)
 
-"enr:-KO4QDZ5eoM0YBROwEDku2nyLQ-QSsMcmfkClWSERfTJZxA-ePCZAjxNA7g9hgpHvCtYJf-WYOcztzhwIqTCh7CoagaGAYAjjoPng2V0aMfGhMGBRa2AgmlkgnY0gmlwhAqI5COJc2VjcDI1NmsxoQO_aUCIaVSbgKddVJJKdiE1vj7120q5YJrXCeHM_HKOTYRzbmFwwIN0Y3CCdl-DdWRwgnZf"
+
 
 
 > This blog explains how to set up a private blockchain network with multiple nodes running on different computers.
