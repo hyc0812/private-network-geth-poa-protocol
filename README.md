@@ -110,7 +110,7 @@ pc1$ geth attach geth.ipc --exec admin.nodeInfo.enr
 ```
 Or use this one to prompt a new Geth CLI and get the ‘node record’:
 ```linux
-pc1$ geth --preload "mineWhenNeeded.js" --preload "checkAllBalances.js" attach geth.ipc
+pc1$ geth --preload "checkAllBalances.js" attach geth.ipc
 pc1> admin.nodeInfo.enr
 ```
 
@@ -149,7 +149,7 @@ pc2$ geth --datadir . --keystore /home/yongchang/.ethereum/keystore --allow-inse
 
 Open a new CLI and input the following:
 ```linux
-pc2$ geth --preload "mineWhenNeeded.js" --preload "checkAllBalances.js" attach geth.ipc
+pc2$ geth --preload "checkAllBalances.js" attach geth.ipc
 ```
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/19y759q7qi3luld44pnm.png)
