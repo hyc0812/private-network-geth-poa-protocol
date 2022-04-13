@@ -1,7 +1,7 @@
 ## Setting up a private network with multiple PCs using Go Ethereum (Geth)
 
 
-"enr:-KO4QF6Dcpj50FbPEkAxz57lEuDptxQpqvTqLzJCxl3EnUTEZUvof69tW4Uo11z4xDpzX84z-ndkfoPvGbV2dyTgOReGAYAkwfa9g2V0aMfGhMGBRa2AgmlkgnY0gmlwhAqI5CKJc2VjcDI1NmsxoQOjJMzoZhkh5D_dNWdRnhpvscavnt6kHz0qMSOUvz1ZN4RzbmFwwIN0Y3CCdl-DdWRwgnZf"
+
 
 > This blog explains how to set up a private blockchain network with multiple nodes running on different computers.
 
@@ -207,5 +207,7 @@ We can use MetaMask to transfer ETH from account_pc1 to account_pc2 and vice ver
 ## References
 
 https://geth.ethereum.org/
+
+"enr:-KO4QF6Dcpj50FbPEkAxz57lEuDptxQpqvTqLzJCxl3EnUTEZUvof69tW4Uo11z4xDpzX84z-ndkfoPvGbV2dyTgOReGAYAkwfa9g2V0aMfGhMGBRa2AgmlkgnY0gmlwhAqI5CKJc2VjcDI1NmsxoQOjJMzoZhkh5D_dNWdRnhpvscavnt6kHz0qMSOUvz1ZN4RzbmFwwIN0Y3CCdl-DdWRwgnZf"
 
 
