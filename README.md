@@ -3,6 +3,7 @@
 
 
 
+
 > This blog explains how to set up a private blockchain network with multiple nodes running on different computers.
 
 > _This tutorial is meant for those with some knowledge of Ethereum and smart contracts, who have some knowledge of nodes, geth and POA, etc._
