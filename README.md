@@ -203,13 +203,15 @@ We can use MetaMask to transfer ETH from account_pc1 to account_pc2 and vice ver
 
 ### ENJOY!
 
+### MEMO
+
+If deploy the bootstrap node on server or cloud, remember to config the firewall to make sure that the TCP, UDP port are open to 30303 and TCP port is open to 8545.
+
 
 ## References
 
 https://geth.ethereum.org/
 
-"enr:-KO4QF6Dcpj50FbPEkAxz57lEuDptxQpqvTqLzJCxl3EnUTEZUvof69tW4Uo11z4xDpzX84z-ndkfoPvGbV2dyTgOReGAYAkwfa9g2V0aMfGhMGBRa2AgmlkgnY0gmlwhAqI5CKJc2VjcDI1NmsxoQOjJMzoZhkh5D_dNWdRnhpvscavnt6kHz0qMSOUvz1ZN4RzbmFwwIN0Y3CCdl-DdWRwgnZf"
 
-http://10.136.228.34:3000/
 
 
