@@ -208,6 +208,12 @@ We can use MetaMask to transfer ETH from account_pc1 to account_pc2 and vice ver
 
 If deploy the bootstrap node on server or cloud, remember to config the firewall to make sure that the TCP, UDP port are open to 30303 and TCP port is open to 8545.
 
+You can unlock it for as long as the geth instance is running using a 0 as the duration parameter:
+
+`web3.personal.unlockAccount("address", "pass", 0)`
+
+
+
 
 ## References
 
